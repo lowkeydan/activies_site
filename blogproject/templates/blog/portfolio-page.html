@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load blog_tags %}
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ post.title }}</title>
+    <meta name="description" content="Demo of Material design portfolio template by TemplateFlip.com."/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;amp;lang=en" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" rel="stylesheet">
+    <link href="{% static 'blog/styles/main.css' %}" rel="stylesheet">
+  </head>
+  <body id="top">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header mdl-layout__header--waterfall site-header">
+        <div class="mdl-layout__header-row site-logo-row"><span class="mdl-layout__title">
+            <div class="site-logo"></div><span class="site-description">寻找真正适合你的活动</span></span></div>
+        <div class="mdl-layout__header-row site-navigation-row mdl-layout--large-screen-only">
+          <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+              {% get_category as category_list %}
+
+                  {% for category in category_list %}
+              <a class="mdl-navigation__link" href="{% url 'blog:category' category.pk %}">{{ category.name }}</a>
+                  {% endfor %}
+
+
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+        <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+              {% get_category as category_list %}
+
+                  {% for category in category_list %}
+              <a class="mdl-navigation__link" href="{% url 'blog:category' category.pk %}">{{ category.name }}</a>
+                  {% endfor %}
+
+
+          </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="site-content">
+          <div class="mdl-grid site-max-width">
+            <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp page-content">
+              <div class="mdl-card__title">
+                <h1 class="mdl-card__title-text" style="margin: 0 auto">{{ post.title }}</h1>
+              </div>
+                <div class="mdl-card__title" style="margin: 0 auto">
+                    <span><time class="mdl-list__item-text-body" datetime="{{ post.created_time }}">发布时间：{{ post.created_time }}</time></span>
+                            <span class="mdl-list__item-text-body" style="margin-left: 10px">作者：{{ post.author }}</span>
+                </div>
+              <div class="mdl-grid site-copy" style="border-top: 1px solid rgba(0,0,0,.1);">
+                <div class="mdl-cell mdl-cell--12-col">
+                    {{ post.body|safe }}
+                    <h3>有任何问题，请联系活动顾问Dan</h3>
+</div>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="footer-container">
+            <div class="mdl-logo"> <a href="#" target="_blank">Daniel_版权所有</a></div>
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="#">Privacy & Terms</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+      <script src="https://code.getmdl.io/1.3.0/material.min.js" defer></script>
+    </div>
+  </body>
+</html>
